@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>住宅ローン 銀行比較ガイド｜株式会社ライフノード</title>
+<meta name="description" content="主要銀行とフラット35の金利・手数料・団信・メリット/デメリットを1ページで比較">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="住宅ローン 銀行比較ガイド｜ライフノード">
+<meta property="og:description" content="主要銀行とフラット35の金利・手数料・団信・メリット/デメリットを1ページで比較">
+<meta name="theme-color" content="#2C2010">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2C2010; --copper:#8B6532; --gold:#C9A96E; --cream:#F7F2EA; --paper:#FFFDF9;
+  --line:#E6DCCB; --muted:#6F6353; --soft:#F1EADF;
+  --net:#8B6532; --mega:#46617A; --flat:#5E7F4F;
+  --good:#2F7A5A; --bad:#B4553A;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%}
+a{color:var(--copper)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums}
+
+/* header / hero */
+.topbar{background:var(--ink);border-bottom:1px solid rgba(201,169,110,.25)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:52px}
+.brand{font-weight:900;letter-spacing:.14em;color:var(--gold);font-size:15px}
+.topbar nav{display:flex;gap:16px;font-size:13px}
+.topbar nav a{color:#E9DFCC;text-decoration:none}
+@media(max-width:640px){.topbar nav{display:none}}
+.hero{background:linear-gradient(160deg,#2C2010 0%,#47331a 100%);color:#fff;padding:36px 0 44px}
+.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700}
+.hero h1{font-size:clamp(26px,5.4vw,42px);line-height:1.3;margin:12px 0 10px;font-weight:900;letter-spacing:.02em}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{margin:0;color:#E2D6C0;font-size:15px;max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.stat{background:rgba(255,255,255,.05);border:1px solid rgba(201,169,110,.35);border-radius:14px;padding:14px 16px}
+.stat .k{font-size:12px;color:#D9CCB4}
+.stat .v{font-size:30px;font-weight:900;color:var(--gold);line-height:1.2;margin-top:4px}
+.stat .s{font-size:12px;color:#BFB29A;margin-top:2px}
+@media(max-width:640px){.stats{grid-template-columns:1fr}.stat{display:grid;grid-template-columns:1fr auto;align-items:center}.stat .s{grid-column:1/-1}}
+
+.alert{margin:20px 0 0;background:#FFF6E5;border:1px solid #E8C989;border-left:6px solid var(--copper);border-radius:12px;padding:14px 16px;font-size:14px}
+.alert b{display:block;color:var(--copper);margin-bottom:2px}
+
+/* sections */
+section{padding:44px 0 8px}
+.sec-h{display:flex;align-items:center;gap:12px;margin:0 0 6px;font-size:clamp(20px,3.6vw,26px);font-weight:900}
+.sec-h .no{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--gold);display:grid;place-items:center;font-size:15px}
+.lead{color:var(--muted);margin:0 0 18px;font-size:14px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+@media(max-width:560px){.panel{padding:16px}}
+
+/* tabs / chips */
+.tabs{display:inline-flex;background:#EBE1CF;border-radius:999px;padding:4px;gap:2px;flex-wrap:wrap}
+.tabs button,.chips button{border:0;font:inherit;cursor:pointer}
+.tabs button{background:transparent;padding:8px 16px;border-radius:999px;font-weight:700;color:var(--muted);font-size:14px}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chips button{background:var(--paper);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;color:var(--muted)}
+.chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:14px 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+
+/* bar chart */
+.bars{display:grid;gap:10px;margin-top:10px}
+.bar-row{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:center;border:0;background:none;padding:4px;margin:-4px;border-radius:10px;text-align:left;font:inherit;color:inherit;cursor:pointer;width:calc(100% + 8px)}
+.bar-row:hover{background:var(--soft)}
+.bar-name{font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{position:relative;height:30px;background:var(--soft);border-radius:8px}
+.bar-fill{height:100%;border-radius:8px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar-val{position:absolute;top:50%;transform:translateY(-50%);font-weight:900;font-size:15px;white-space:nowrap;padding-left:8px}
+.bar-val .best{display:inline-block;margin-left:6px;background:var(--gold);color:var(--ink);font-size:11px;padding:1px 7px;border-radius:999px;vertical-align:2px}
+.chart-note{font-size:12px;color:var(--muted);margin:14px 0 0}
+@media(max-width:560px){.bar-row{grid-template-columns:1fr;gap:2px}}
+
+/* simulator */
+.sim{display:grid;grid-template-columns:330px 1fr;gap:20px;align-items:start}
+@media(max-width:820px){.sim{grid-template-columns:1fr}}
+.ctrl{background:var(--soft);border-radius:14px;padding:18px}
+.ctrl label{display:block;font-size:13px;color:var(--muted);font-weight:700}
+.ctrl .amt{font-size:30px;font-weight:900;margin:2px 0 6px}
+.ctrl .amt small{font-size:15px;margin-left:2px}
+.ctrl input[type=range]{width:100%;accent-color:var(--copper);margin:0 0 18px}
+.ctrl .tabs{margin-top:6px}
+.ctrl .hint{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6}
+.res-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.res-head b{font-size:15px}
+.res-head span{font-size:12px;color:var(--muted)}
+.res{display:grid;gap:8px}
+.res-row{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.res-row.top{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,169,110,.35) inset}
+.res-name{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;min-width:0}
+.res-name span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.res-pay{font-size:22px;font-weight:900;text-align:right;white-space:nowrap}
+.res-pay small{font-size:12px;font-weight:700}
+.res-sub{grid-column:1/-1;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.res-sub .diff{color:var(--bad);font-weight:700}
+.res-sub .zero{color:var(--good);font-weight:700}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+@media(max-width:380px){.cards{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;scroll-margin-top:16px;transition:box-shadow .3s}
+.card.flash{box-shadow:0 0 0 3px var(--gold)}
+.card-head{padding:14px 16px 12px;border-top:6px solid var(--tc)}
+.card-head .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.type-tag{font-size:11px;font-weight:700;color:#fff;background:var(--tc);padding:2px 9px;border-radius:999px;white-space:nowrap}
+.card-head .month{font-size:11px;color:var(--muted)}
+.card-head h3{margin:6px 0 0;font-size:19px;line-height:1.35}
+.card-head .old{font-size:12px;color:var(--muted);font-weight:500}
+.rates{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#FBF7F0}
+.rate{padding:10px 4px;text-align:center}
+.rate + .rate{border-left:1px solid var(--line)}
+.rate .l{font-size:11px;color:var(--muted);font-weight:700}
+.rate .n{font-size:21px;font-weight:900;line-height:1.3}
+.rate .n small{font-size:12px}
+.rate .n.na{color:#B9AE9C;font-size:15px;line-height:1.9}
+.cond{font-size:12px;color:var(--muted);padding:8px 16px 0}
+.spec{margin:0;padding:10px 16px 4px;display:grid;grid-template-columns:92px 1fr;gap:6px 10px;font-size:13px}
+.spec dt{color:var(--muted);font-weight:700}
+.spec dd{margin:0}
+.pc{padding:8px 16px 4px;display:grid;gap:8px}
+.pc h4{margin:0 0 2px;font-size:12px;letter-spacing:.05em}
+.pc ul{margin:0;padding:0;list-style:none;font-size:13px;display:grid;gap:3px}
+.pc li{display:grid;grid-template-columns:18px 1fr;gap:2px}
+.pros h4{color:var(--good)} .pros li::before{content:"○";color:var(--good);font-weight:900}
+.cons h4{color:var(--bad)} .cons li::before{content:"△";color:var(--bad);font-weight:900}
+.fit{margin:10px 16px 0;background:#F4ECDD;border-radius:10px;padding:10px 12px;font-size:13px}
+.fit b{color:var(--copper)}
+.src{font-size:11px;color:var(--muted);padding:10px 16px 14px;margin-top:auto;word-break:break-all}
+.src a{color:var(--muted)}
+
+/* table */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+table{border-collapse:separate;border-spacing:0;min-width:1400px;width:100%;font-size:13px}
+td.t{min-width:220px}
+td.nw{white-space:nowrap}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{background:var(--ink);color:#fff;font-weight:700;white-space:nowrap;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+th:first-child,td:first-child{position:sticky;left:0;z-index:1;min-width:132px;box-shadow:1px 0 0 var(--line)}
+td:first-child{background:var(--paper);font-weight:700}
+thead th:first-child{z-index:2;background:var(--ink)}
+td.r{font-weight:900;font-size:15px;white-space:nowrap}
+td.low{background:#F6EBD3}
+.scroll-hint{font-size:12px;color:var(--muted);margin:8px 0 0}
+
+/* knowledge */
+.kb{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:720px){.kb{grid-template-columns:1fr}}
+.kb .panel h3{margin:0 0 8px;font-size:17px}
+.kb .panel p{margin:8px 0 0;font-size:14px}
+.kb svg{width:100%;height:auto;display:block;margin:4px 0}
+.kb .tip{font-size:13px;background:var(--soft);border-radius:10px;padding:8px 12px;margin-top:10px}
+
+/* steps / cta / footer */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:s}
+@media(max-width:720px){.steps{grid-template-columns:1fr}}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+.step b::before{counter-increment:s;content:"STEP " counter(s);display:block;color:var(--copper);font-size:12px;letter-spacing:.1em}
+.step span{font-size:13px;color:var(--muted)}
+.cta{margin:44px 0 0;background:var(--ink);color:#fff;border-radius:20px;padding:28px 24px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+@media(max-width:720px){.cta{grid-template-columns:1fr}}
+.cta h3{margin:0 0 6px;font-size:20px;color:var(--gold)}
+.cta p{margin:0;color:#E2D6C0;font-size:14px}
+.cta a.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--ink);text-decoration:none;font-weight:900;padding:14px 22px;border-radius:999px;font-size:17px;white-space:nowrap}
+.notes{font-size:12px;color:var(--muted);margin:28px 0 0;padding:0 0 0 18px}
+.notes li{margin:3px 0}
+footer{margin-top:36px;background:var(--ink);color:#CDBFA6;font-size:12px;padding:24px 0 32px}
+footer .brand{display:block;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <span class="brand">LIFENODE</span>
+  <nav><a href="#chart">金利グラフ</a><a href="#sim">返済シミュレーション</a><a href="#banks">銀行ごとの特徴</a><a href="#table">比較表</a><a href="#kb">基礎知識</a></nav>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="badge" id="asof"></span>
+  <h1>住宅ローン<br><em>銀行比較ガイド</em></h1>
+  <p>主な銀行とフラット35の「金利」「手数料」「団信」「メリット・デメリット」を1ページにまとめました。気になる銀行をタップすると詳しい説明に移動します。</p>
+  <div class="stats" id="stats"></div>
+</div></header>
+
+<main class="wrap">
+
+<div class="alert">
+  <b>いまの金利の動き</b>
+  日銀は2026年9月に政策金利を1.25%へ引き上げました。大手銀行は11月に短期プライムレート（変動金利の基準になる金利）の引上げを発表しており、変動金利は今後上がる可能性があります。お申込みの前に最新の金利をご確認ください。
+</div>
+
+<section id="chart">
+  <h2 class="sec-h"><span class="no">1</span>金利をくらべる</h2>
+  <p class="lead">各行の公表する「一番条件の良い金利（最優遇）」です。実際の金利は審査で決まります。</p>
+  <div class="panel">
+    <div class="tabs" data-ratetabs></div>
+    <div class="legend" id="legend"></div>
+    <div class="bars" id="bars"></div>
+    <p class="chart-note" id="chartNote"></p>
+  </div>
+</section>
+
+<section id="sim">
+  <h2 class="sec-h"><span class="no">2</span>月々の返済額をくらべる</h2>
+  <p class="lead">借入額と期間を動かすと、銀行ごとの月々の返済額と最初にかかる手数料が変わります。</p>
+  <div class="panel sim">
+    <div class="ctrl">
+      <label for="amt">借入額</label>
+      <div class="amt num"><span id="amtV"></span><small>万円</small></div>
+      <input id="amt" type="range" min="1000" max="12000" step="100" value="5000">
+      <label for="yrs">返済期間</label>
+      <div class="amt num"><span id="yrsV"></span><small>年</small></div>
+      <input id="yrs" type="range" min="10" max="35" step="1" value="35">
+      <label>金利タイプ</label>
+      <div class="tabs" data-ratetabs></div>
+      <p class="hint" id="simHint"></p>
+    </div>
+    <div>
+      <div class="res-head"><b id="resTitle"></b><span>元利均等・ボーナス返済なし</span></div>
+      <div class="res" id="res"></div>
+    </div>
+  </div>
+</section>
+
+<section id="banks">
+  <h2 class="sec-h"><span class="no">3</span>銀行ごとの特徴</h2>
+  <p class="lead">金利だけでなく、手数料・団信（保険）・相談のしやすさも大事です。</p>
+  <div class="chips" id="chips"></div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section id="table">
+  <h2 class="sec-h"><span class="no">4</span>一覧表でくらべる</h2>
+  <p class="lead">各列でいちばん低い金利に色を付けています。</p>
+  <div class="table-wrap"><table id="tbl"></table></div>
+  <p class="scroll-hint">※ スマホでは表を横にスクロールできます</p>
+</section>
+
+<section id="kb">
+  <h2 class="sec-h"><span class="no">5</span>選ぶ前に知っておきたいこと</h2>
+  <p class="lead">比較表の言葉の意味を、かんたんにまとめました。</p>
+  <div class="kb">
+    <div class="panel">
+      <h3>変動金利と固定金利</h3>
+      <svg viewBox="0 0 320 120" role="img" aria-label="変動金利は今は低いが将来上がることがある。固定金利は高めだが変わらない。">
+        <line x1="30" y1="104" x2="310" y2="104" stroke="#D8CBB5"/>
+        <line x1="30" y1="12" x2="30" y2="104" stroke="#D8CBB5"/>
+        <text x="6" y="16" font-size="10" fill="#6F6353">金利</text>
+        <text x="270" y="118" font-size="10" fill="#6F6353">年数→</text>
+        <line x1="30" y1="46" x2="300" y2="46" stroke="#5E7F4F" stroke-width="3"/>
+        <text x="216" y="38" font-size="11" font-weight="700" fill="#5E7F4F">固定：ずっと同じ</text>
+        <polyline points="30,84 90,84 90,76 150,76 150,64 210,64 210,52 300,40" fill="none" stroke="#8B6532" stroke-width="3" stroke-dasharray="0" />
+        <polyline points="210,64 300,82" fill="none" stroke="#8B6532" stroke-width="2" stroke-dasharray="4 4" opacity=".6"/>
+        <text x="36" y="98" font-size="11" font-weight="700" fill="#8B6532">変動：今は低い→上下する</text>
+      </svg>
+      <p><b>変動金利</b>は今の金利が低いかわりに、世の中の金利が上がると返済額も上がります。<b>固定金利</b>は高めですが、決めた期間は返済額が変わりません。</p>
+      <div class="tip">収入に余裕があり、金利上昇に備えて貯金や繰上返済ができる方は変動、毎月の額を確定させたい方は固定が向いています。</div>
+    </div>
+    <div class="panel">
+      <h3>「5年ルール」「125%ルール」</h3>
+      <svg viewBox="0 0 320 120" role="img" aria-label="5年ルールありの銀行は返済額が5年ごとにしか変わらず、上がり幅も1.25倍まで。">
+        <line x1="30" y1="104" x2="310" y2="104" stroke="#D8CBB5"/>
+        <text x="6" y="16" font-size="10" fill="#6F6353">返済額</text>
+        <polyline points="30,80 120,80 120,62 210,62 210,44 300,44" fill="none" stroke="#46617A" stroke-width="3"/>
+        <text x="36" y="74" font-size="11" font-weight="700" fill="#46617A">ルールあり：5年ごと・最大1.25倍</text>
+        <polyline points="30,92 60,90 90,86 120,84 150,78 180,72 210,66 240,58 270,50 300,40" fill="none" stroke="#B4553A" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="150" y="98" font-size="11" font-weight="700" fill="#B4553A">ルールなし：半年ごとに見直し</text>
+        <text x="112" y="118" font-size="10" fill="#6F6353">5年</text><text x="202" y="118" font-size="10" fill="#6F6353">10年</text>
+      </svg>
+      <p>変動金利で金利が上がったとき、<b>返済額の見直しを5年ごと・上がり幅を1.25倍まで</b>におさえる仕組みです。急な負担増は防げますが、そのぶん元金が減りにくくなります。</p>
+      <div class="tip">ルールの無い銀行は、金利が上がると半年ごとに返済額へすぐ反映されます。どちらが良い・悪いではなく「上がったときの家計の動き方」が違います。</div>
+    </div>
+    <div class="panel">
+      <h3>事務手数料（定率型と定額型）</h3>
+      <p style="margin-top:0">いまは多くの銀行が<b>定率型</b>の「借入額 × 2.2%」で、5,000万円なら<b>110万円</b>になります。楽天銀行のように借入額に関係なく一律の<b>定額型</b>や、みずほ・りそなのように<b>手数料0円のかわりに金利が高くなる型</b>もあります。保証料は、掲載した銀行では無料か金利に含まれています。</p>
+      <div class="tip">金利だけで比べず、「金利 ＋ 手数料」の合計で比べるのがポイントです。借入額が大きいほど、定額型の手数料が有利になります。上のシミュレーションでは手数料も表示しています。</div>
+    </div>
+    <div class="panel">
+      <h3>団信（団体信用生命保険）</h3>
+      <p style="margin-top:0">ローンを借りた人が亡くなったり重い病気になったとき、残りのローンが保険で返済される仕組みです。多くの銀行で基本の団信は無料。<b>がん・3大疾病・全疾病</b>などの保障が無料で付く銀行もあります。</p>
+      <div class="tip">同じ金利なら、無料で付く保障が厚い銀行ほどお得です。持病がある方は「ワイド団信」が使えるかも確認しましょう。</div>
+    </div>
+  </div>
+
+  <h3 style="margin:32px 0 12px;font-size:18px">銀行選びの進め方</h3>
+  <div class="steps">
+    <div class="step"><b>候補を2〜3行にしぼる</b><span>金利・手数料・団信・相談方法から、ご自身に合いそうな銀行を選びます。</span></div>
+    <div class="step"><b>事前審査を出す</b><span>同時に複数行へ出すのが一般的です。結果の金利・借入可能額を見て比べます。</span></div>
+    <div class="step"><b>本審査・契約</b><span>物件の売買契約後に本審査。引渡し日に合わせて融資が実行されます。</span></div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h3>どの銀行が合うかは、お客様ごとに違います</h3>
+      <p>勤務先・年収・物件・自己資金によって、通りやすい銀行や実際の金利は変わります。事前審査の進め方や書類の準備も、ライフノードがお手伝いします。</p>
+    </div>
+    <a class="btn" href="tel:0368216171">☎ 03-6821-6171</a>
+  </div>
+
+  <ul class="notes" id="notes"></ul>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span class="brand">LIFENODE</span>
+  株式会社ライフノード　宅地建物取引業 東京都知事(1)第113622号<br>
+  〒101-0051 東京都千代田区神田神保町2-2-33 神田神保町二丁目ビル403　TEL 03-6821-6171
+</div></footer>
+
+<script>
+/* ===== データ（毎月ここを更新） ===================================== */
+const DATA = {
+  asOf: "2026年10月",          // ページ上部の「○年○月時点」
+  checked: "2026年10月26日",    // 各行サイトを確認した日
+  boj: { rate: "1.25%", note: "2026年9月に1.0%→1.25%へ引上げ" }, // 日銀の政策金利
+  // 金利は各行の最優遇（セット割は除く）。null＝取扱なし・非公表
+  // feeCalc: rate=借入額×率（plus=定額の上乗せ）／fixed=定額／range=率の幅。feeBy で金利タイプ別に上書き
+  banks: [
+    { id: "docomo", type: "net", name: "ドコモSMTBネット銀行", short: "ドコモSMTBネット銀行", oldName: "住信SBIネット銀行（2026年8月に行名変更）",
+      month: "2026年10月適用", variable: 1.600, fixed10: 3.379, fixed35: 4.019,
+      variableCond: "対面相談コース・物件価格の80%以下の場合の最も低い金利。審査により年0.1〜0.55%上乗せになる場合あり。ネットだけで申し込むWEB申込コース（変動2.000%）は10/30で新規受付終了",
+      fee: "借入額×2.2%", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "無料",
+      danshin: "全疾病保障（50歳以下は3大疾病50%保障も）", rule: "あり",
+      inPerson: "全国50店舗超で対面相談（銀行代理業者）・アプリのチャット",
+      pros: ["全疾病保障が上乗せ金利なしで付く", "50歳以下は3大疾病50%保障も無料", "全国50店舗超で対面相談できる"],
+      cons: ["事務手数料が借入額の2.2%", "審査により金利が上乗せされる場合あり", "固定期間中の全額返済は3.3万円"],
+      fit: "病気への保障を厚くしたい方／店舗で相談しながら進めたい方",
+      sources: ["https://www.netbk.co.jp/contents/lineup/home-loan/real/kinri/", "https://www.netbk.co.jp/contents/lineup/home-loan/danshin/"] },
+
+    { id: "jibun", type: "net", name: "auじぶん銀行", month: "2026年10月適用", variable: 1.680, fixed10: 3.416, fixed35: 4.755,
+      variableCond: "全期間引下げプラン・50歳以下・物件価格の80%以下・一般団信のみの場合（がん50%団信を付けると1.734%）。auのスマホ・じぶんでんき等のセットで最大年0.15%さらに引下げ。審査により金利の高い保証付プラン（変動1.900%〜）になる場合あり。35年固定はがん50%団信付きの金利",
+      fee: "借入額×2.2%", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "無料",
+      danshin: "がん50%保障団信（50歳以下・上乗せなし）", rule: "あり", inPerson: "ネット完結（オンライン相談中心）",
+      pros: ["がん50%保障団信が上乗せなしで付く", "au・電気等のセットで最大0.15%引下げ", "ネットで契約まで完結できる"],
+      cons: ["事務手数料が借入額の2.2%", "セット割はau系サービスの契約が前提", "審査次第で金利の高いプランになる場合あり"],
+      fit: "auのスマホ・じぶんでんき等を使っている方／がん保障を無料で付けたい方",
+      sources: ["https://www.jibunbank.co.jp/products/homeloan/rate/", "https://www.jibunbank.co.jp/products/homeloan/insurance/"] },
+
+    { id: "paypay", type: "net", name: "PayPay銀行", month: "2026年10月適用", variable: 1.580, fixed10: 3.520, fixed35: 4.210,
+      variableCond: "全期間引下型。ソフトバンクのスマホ・ネット・でんきのセットで最大年0.13%引下げ（1.450%）。借入35年超は+0.30%、審査により+0.30%になる場合あり",
+      fee: "借入額×2.2%", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "無料（印紙代も0円）",
+      danshin: "一般団信（がん・全疾病保障は+0.1%〜）", rule: "なし", inPerson: "店舗なし・オンライン完結（チャット・電話）",
+      pros: ["ソフトバンク利用で最大0.13%引下げ", "保証料・印紙代が0円", "オンラインで手続きが完結する"],
+      cons: ["借入35年超は金利+0.30%", "全疾病保障などは上乗せ金利が必要", "全額繰上返済は33,000円"],
+      fit: "ソフトバンクのスマホ・でんきを使っている方／手続きをスマホで済ませたい方",
+      sources: ["https://www.paypay-bank.co.jp/mortgage/interest/index.html", "https://www.paypay-bank.co.jp/mortgage/insurance/select.html"] },
+
+    { id: "sony", type: "net", name: "ソニー銀行", month: "2026年10月適用", variable: 1.847, fixed10: 3.715, fixed35: 4.975,
+      variableCond: "変動セレクト住宅ローン（手数料2.2%型）・新規購入。11月適用は変動1.847%（据え置き）・10年固定3.653%。35年固定は手数料44,000円の「住宅ローン」の金利。年収400万円以上が申込条件",
+      fee: "借入額×2.2%（定額44,000円の型も選べる※金利は高め）", feeCalc: { type: "rate", rate: 0.022 }, feeBy: { fixed35: { type: "fixed", yen: 44000 } },
+      guarantee: "無料", danshin: "がん団信50（50歳未満）・一般団信", rule: "なし", inPerson: "来店不要・ウェブ完結（土日祝も電話相談）",
+      pros: ["繰上返済・金利タイプ変更の手数料が0円", "土日祝も電話で相談できる", "手数料を定率か定額から選べる"],
+      cons: ["年収400万円以上が申込条件", "変動金利は掲載行の中では高め", "つなぎ融資は他社の利用が必要"],
+      fit: "繰上返済をこまめにしたい方／借りた後に固定へ切り替えるかもしれない方",
+      sources: ["https://sonybank.jp/rate/hl01.html", "https://sonybank.jp/products/hl/"] },
+
+    { id: "rakuten", type: "net", name: "楽天銀行", month: "2026年10月適用", variable: 1.747, fixed10: 4.074, fixed35: null,
+      variableCond: "金利選択型・新規借入。表示は引下げ幅が最大の場合（条件は非公表・審査で決定）。11月適用は1.797%〜。返済口座を他行にすると+0.3%",
+      fee: "一律33万円（借入額にかかわらず定額）", feeCalc: { type: "fixed", yen: 330000 }, guarantee: "無料",
+      danshin: "がん50%保障＋全疾病（50歳以下）", rule: "あり", inPerson: "店舗なし・オンライン相談（毎日9〜21時・予約制）",
+      pros: ["手数料が一律33万円（借入が大きいほど有利）", "がん50%＋全疾病保障が0円", "つなぎローンに対応"],
+      cons: ["35年などの長期固定が無い（最長10年）", "他行口座で返済すると金利+0.3%", "変動金利は毎月見直し"],
+      fit: "借入額が大きい方（手数料が定額）／楽天銀行を返済口座にできる方",
+      sources: ["https://www.rakuten-bank.co.jp/home-loan/rate/", "https://www.rakuten-bank.co.jp/home-loan/insurance/"] },
+
+    { id: "shinsei", type: "net", name: "SBI新生銀行", month: "2026年10月適用", variable: 1.410, fixed10: 3.380, fixed35: 4.330,
+      variableCond: "変動（半年型）・自己資金10%以上の「自己資金優遇」の金利（通常1.430%）。SBIハイパー預金の利用で1.340%になる優遇もあり（併用不可）。35年超は+0.1%",
+      fee: "借入額×2.2%（電子契約は別途5,500円）", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "無料",
+      danshin: "全疾病保障付団信（49歳以下）", rule: "なし", inPerson: "店頭で相談可・チャット・電話",
+      pros: ["自己資金1割以上で金利優遇", "全疾病保障付団信が上乗せなし", "繰上返済は一部・全額とも0円"],
+      cons: ["事務手数料が借入額の2.2%", "融資まで1か月半以上かかる場合あり", "繰上返済は期間短縮型のみ"],
+      fit: "自己資金を1割以上入れられる方／繰上返済で早めに返したい方",
+      sources: ["https://www.sbishinseibank.co.jp/retail/housing/interest/interest_rate_new/", "https://www.sbishinseibank.co.jp/retail/housing/insurance.html"] },
+
+    { id: "mufg", type: "mega", name: "三菱UFJ銀行", month: "2026年10月適用", variable: 1.195, fixed10: 3.75, fixed35: 4.35,
+      variableCond: "ずーっと一律優遇コース（店頭金利から完済まで年2.18%引下げ）。勤続1年以上・給与振込・メインバンクプラス等の利用が条件。10年固定は当初10年のみ優遇（その後は店頭金利から年1.55%引下げ）",
+      fee: "借入額×2.2%", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "不要",
+      danshin: "一般団信（疾病保障は+0.15%〜）", rule: "あり", inPerson: "ローン窓口のある店舗で対面相談（予約制）・電話",
+      pros: ["変動金利の水準が低め", "借入期間40年でも金利の上乗せなし", "ネットなら一部繰上返済が無料"],
+      cons: ["給与振込などの利用条件が付く", "事務手数料が借入額の2.2%", "対面相談はローン窓口のある店舗のみ"],
+      fit: "給与振込を三菱UFJ銀行にできる方／長い期間（40年）で借りたい方",
+      sources: ["https://www.bk.mufg.jp/kariru/jutaku/yuuguu/index.html", "https://www.bk.mufg.jp/kariru/jutaku/hoken/shippei/index.html"] },
+
+    { id: "smbc", type: "mega", name: "三井住友銀行", month: "2026年10月適用", variable: 1.525, fixed10: 4.00, fixed35: 4.76,
+      variableCond: "WEB申込専用住宅ローン「最後までずーっと引き下げプラン」。Olive口座の開設と給与振込が前提。10年固定は当初10年のみ優遇の「最初にぐぐっと引き下げプラン」",
+      fee: "借入額×2.2%", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "金利に含む",
+      danshin: "一般団信（8大疾病保障は+0.30%）", rule: "あり", inPerson: "WEB・電話で相談（電話は土日祝も）",
+      pros: ["ネットで24時間申込・相談できる", "ネットなら繰上返済が無料", "自然災害などの保障オプションを選べる"],
+      cons: ["メガバンクの中では変動金利が高め", "Olive口座と給与振込が前提", "事務手数料が借入額の2.2%"],
+      fit: "Oliveや三井住友銀行をメインで使っている方／ネットで手続きしたい方",
+      sources: ["https://www.smbc.co.jp/kojin/jutaku_loan/kinri/", "https://www.smbc.co.jp/kojin/jutaku_loan/shouhin/web_jutaku/"] },
+
+    { id: "mizuho", type: "mega", name: "みずほ銀行", month: "2026年10月適用", variable: 1.275, fixed10: 3.60, fixed35: 4.16,
+      variableCond: "ローン取扱手数料型で引下げが最も大きい場合（1.275〜1.725%・審査で決定）。手数料0円の「借入時負担ゼロ型」は約0.2%高い（1.475%〜）",
+      fee: "借入額×2.2%（手数料0円で金利が約0.2%高い型も選べる）", feeCalc: { type: "rate", rate: 0.022 }, guarantee: "金利に含む",
+      danshin: "一般団信（がん団信は+0.1%）", rule: "あり", inPerson: "ローン専門拠点で対面相談（一部は平日夜・土曜も）・LINE・オンライン",
+      pros: ["手数料0円の型も選べる", "がん団信の上乗せが年0.1%と小さめ", "対面の専門拠点で相談できる"],
+      cons: ["手数料0円の型は金利が約0.2%高い", "どこまで引下げになるかは審査で決まる", "全期間固定は手数料型のみ"],
+      fit: "最初の手数料をおさえたい方／対面でじっくり相談したい方",
+      sources: ["https://www.mizuhobank.co.jp/loan_housing/housingloancost/index.html", "https://www.mizuhobank.co.jp/loan_housing/life_insurance/index.html"] },
+
+    { id: "resona", type: "mega", name: "りそな銀行", month: "2026年10月適用", variable: 1.250, fixed10: 4.205, fixed35: 4.570,
+      variableCond: "融資手数料型で、WEB完結（▲0.05%）と給与振込等（▲0.03%）の両方を満たした場合。満たさない場合は1.330%",
+      fee: "借入額×2.2%＋保証会社事務手数料5.5万円（手数料なしで金利+0.3%の型も）", feeCalc: { type: "rate", rate: 0.022, plus: 55000 }, guarantee: "金利に含む",
+      danshin: "一般団信（団信革命などの特約は+0.1%〜）", rule: "あり", inPerson: "店舗で相談（土日祝に営業する店舗あり）・テレビ電話",
+      pros: ["土日営業の店舗で相談できる", "団信の種類が豊富（団信革命など）", "つなぎ融資・分割融資に対応"],
+      cons: ["10年固定の金利は高め", "手数料2.2%に加え事務手数料5.5万円", "特約付団信は50歳以上は申込不可"],
+      fit: "土日に店舗で相談したい方／保障の厚い団信を選びたい方",
+      sources: ["https://www.resonabank.co.jp/kojin/jutaku/kinri/", "https://www.resonabank.co.jp/kojin/jutaku/danshin/"] },
+
+    { id: "flat", type: "flat", name: "フラット35（住宅金融支援機構）", short: "フラット35", month: "2026年10月資金受取分", variable: null, fixed10: null, fixed35: 3.830,
+      variableCond: "全期間固定のみ。表示は最も多い金利（借入期間21〜35年・融資率9割以下・団信付き）。金利の範囲は3.830〜5.840%で取扱機関により異なる。子育て世帯・省エネ住宅などは当初5年など最大年1.0%の引下げ制度あり",
+      fee: "取扱機関で異なる（例：融資額×1.1%〜2.2%）", feeCalc: { type: "range", lo: 0.011, hi: 0.022 }, guarantee: "不要（保証人も不要）",
+      danshin: "新機構団信（費用は金利に含む）", rule: "対象外（全期間固定）", inPerson: "取扱金融機関の窓口・機構のカスタマーセンター（土日も）",
+      pros: ["完済まで金利・返済額が変わらない", "保証料・繰上返済手数料が不要", "子育て・省エネ住宅で金利引下げ制度あり"],
+      cons: ["変動金利より金利が高い", "融資手数料は取扱機関ごとに差がある", "住宅の技術基準を満たす必要がある"],
+      fit: "完済まで返済額を固定したい方／子育て世帯・省エネ住宅を買う方",
+      sources: ["https://www.flat35.com/loan/index.html", "https://www.simulation.jhf.go.jp/flat35/kinri/index.php/rates/top"] }
+  ]
+};
+/* ================================================================== */
+
+const TYPES = {
+  net:  { label: "ネット銀行",     color: "var(--net)"  },
+  mega: { label: "メガ・都市銀行", color: "var(--mega)" },
+  flat: { label: "フラット35",     color: "var(--flat)" }
+};
+const RATES = [
+  { key: "variable", label: "変動",       long: "変動金利" },
+  { key: "fixed10",  label: "10年固定",   long: "10年固定（当初期間）" },
+  { key: "fixed35",  label: "全期間固定", long: "全期間固定（35年）" }
+];
+const st = { rate: "variable", amount: 5000, years: 35, filter: "all" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = v => v == null ? "—" : v.toFixed(3) + "%";
+const yen = v => Math.round(v).toLocaleString("ja-JP");
+const man = v => (v / 10000).toLocaleString("ja-JP", { maximumFractionDigits: 1 }) + "万円";
+const rateOf = (b, k) => b[k] == null ? null : b[k];
+
+function monthly(principal, ratePct, years) {
+  const r = ratePct / 100 / 12, n = years * 12;
+  return r === 0 ? principal / n : principal * r / (1 - Math.pow(1 + r, -n));
+}
+function feeText(b, principal, k) {
+  const f = (b.feeBy && b.feeBy[k]) || b.feeCalc || {};
+  if (f.type === "rate") return man(principal * f.rate + (f.plus || 0));
+  if (f.type === "fixed") return yen(f.yen) + "円";
+  if (f.type === "range") return `${man(principal * f.lo)}〜${man(principal * f.hi)}`;
+  return "要確認";
+}
+
+function renderStats() {
+  const v = DATA.banks.filter(b => b.variable != null).sort((a, b) => a.variable - b.variable)[0];
+  const f = DATA.banks.filter(b => b.fixed35 != null).sort((a, b) => a.fixed35 - b.fixed35)[0];
+  const flat = DATA.banks.find(b => b.type === "flat");
+  const cells = [
+    { k: "日銀の政策金利", v: DATA.boj.rate || "—", s: DATA.boj.note },
+    { k: "変動金利のいちばん低い銀行", v: v ? pct(v.variable) : "—", s: v ? v.short || v.name : "" },
+    flat && flat.fixed35 != null
+      ? { k: "フラット35（最も多い金利）", v: pct(flat.fixed35), s: "借入期間21〜35年・融資率9割以下" }
+      : { k: "全期間固定のいちばん低い銀行", v: f ? pct(f.fixed35) : "—", s: f ? f.short || f.name : "" }
+  ];
+  $("#stats").innerHTML = cells.map(c =>
+    `<div class="stat"><div><div class="k">${esc(c.k)}</div><div class="s">${esc(c.s)}</div></div><div class="v num">${esc(c.v)}</div></div>`).join("");
+  $("#asof").textContent = `${DATA.asOf}時点の金利`;
+}
+
+function renderTabs() {
+  document.querySelectorAll("[data-ratetabs]").forEach(el => {
+    el.innerHTML = RATES.map(r => `<button type="button" data-k="${r.key}" aria-pressed="${st.rate === r.key}">${r.label}</button>`).join("");
+  });
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-ratetabs] button");
+  if (!b) return;
+  st.rate = b.dataset.k;
+  renderTabs(); renderBars(); renderSim();
+});
+
+function renderBars() {
+  const k = st.rate;
+  const list = DATA.banks.filter(b => rateOf(b, k) != null).sort((a, b) => rateOf(a, k) - rateOf(b, k));
+  const max = Math.max(...list.map(b => rateOf(b, k)), 0.1) * 1.32;
+  const min = list.length ? rateOf(list[0], k) : null;
+  $("#bars").innerHTML = list.map(b => {
+    const w = rateOf(b, k) / max * 100;
+    return `<button type="button" class="bar-row" data-go="${b.id}" aria-label="${esc(b.name)} ${pct(rateOf(b, k))}">
+      <span class="bar-name">${esc(b.short || b.name)}</span>
+      <span class="bar-track"><span class="bar-fill" style="display:block;width:${w}%;background:${TYPES[b.type].color}"></span>
+      <span class="bar-val num" style="left:${w}%">${pct(rateOf(b, k))}${rateOf(b, k) === min ? '<span class="best">最安</span>' : ""}</span></span>
+    </button>`;
+  }).join("");
+  const missing = DATA.banks.filter(b => rateOf(b, k) == null).map(b => b.short || b.name);
+  const extra = {
+    variable: "",
+    fixed10: "※ 10年固定は、11年目以降の金利の決まり方が銀行ごとに違います（当初10年だけ優遇する銀行もあります）。",
+    fixed35: "※ フラット35は最も多い金利、各銀行は最も低い金利です。"
+  };
+  $("#chartNote").textContent = extra[k] + (missing.length ? `※ ${missing.join("・")}は${RATES.find(r => r.key === k).label}の取扱いが無いため表示していません。` : "") +
+    "　バーをタップするとその銀行の説明に移動します。";
+}
+$("#legend").innerHTML = Object.values(TYPES).map(t => `<span><i class="dot" style="background:${t.color}"></i>${t.label}</span>`).join("");
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]");
+  if (!b) return;
+  st.filter = "all"; renderChips(); renderCards();
+  const c = document.getElementById("bank-" + b.dataset.go);
+  if (!c) return;
+  c.scrollIntoView({ behavior: "smooth", block: "start" });
+  c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 1600);
+});
+
+function renderSim() {
+  const P = st.amount * 10000, Y = st.years, k = st.rate;
+  $("#amtV").textContent = st.amount.toLocaleString("ja-JP");
+  $("#yrsV").textContent = Y;
+  const list = DATA.banks.filter(b => rateOf(b, k) != null)
+    .map(b => ({ b, m: monthly(P, rateOf(b, k), Y) })).sort((a, z) => a.m - z.m);
+  const best = list.length ? list[0].m : 0;
+  const span = k === "fixed10" ? Math.min(Y, 10) : Y; // 10年固定は金利が決まっている当初10年分だけで差額を出す
+  $("#resTitle").textContent = `${RATES.find(r => r.key === k).long}で${man(P)}・${Y}年借りた場合`;
+  $("#res").innerHTML = list.map((x, i) => {
+    const d = x.m - best;
+    return `<div class="res-row${i === 0 ? " top" : ""}">
+      <div class="res-name"><i class="dot" style="background:${TYPES[x.b.type].color}"></i><span>${esc(x.b.short || x.b.name)}</span></div>
+      <div class="res-pay num">${yen(x.m)}<small>円/月</small></div>
+      <div class="res-sub"><span>金利 ${pct(rateOf(x.b, k))}</span><span>事務手数料 ${esc(feeText(x.b, P, k))}</span>
+      ${d < 1 ? '<span class="zero">いちばん低い</span>' : `<span class="diff">+${yen(d)}円/月（${span}年で約${man(d * span * 12)}）</span>`}</div>
+    </div>`;
+  }).join("");
+  const hints = {
+    variable: "※ 変動金利は、今の金利がずっと変わらなかった場合の目安です。金利が上がれば返済額も上がります。",
+    fixed10: "※ 当初10年間の月々の返済額です。11年目以降はその時の金利で返済額が変わります。",
+    fixed35: "※ 全期間固定は、完済まで返済額が変わりません。"
+  };
+  $("#simHint").textContent = hints[k] + "保証料・団信の上乗せ金利は含みません。";
+}
+$("#amt").addEventListener("input", e => { st.amount = +e.target.value; renderSim(); });
+$("#yrs").addEventListener("input", e => { st.years = +e.target.value; renderSim(); });
+
+function renderChips() {
+  const opts = [["all", "すべて"], ...Object.entries(TYPES).map(([k, t]) => [k, t.label])];
+  $("#chips").innerHTML = opts.map(([k, l]) => `<button type="button" data-f="${k}" aria-pressed="${st.filter === k}">${l}</button>`).join("");
+}
+$("#chips").addEventListener("click", e => {
+  const b = e.target.closest("[data-f]");
+  if (!b) return;
+  st.filter = b.dataset.f; renderChips(); renderCards();
+});
+
+function host(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return u; } }
+function renderCards() {
+  const list = DATA.banks.filter(b => st.filter === "all" || b.type === st.filter);
+  $("#cards").innerHTML = list.map(b => {
+    const t = TYPES[b.type];
+    const rates = RATES.map(r => {
+      const v = rateOf(b, r.key);
+      return `<div class="rate"><div class="l">${r.label}</div><div class="n num${v == null ? " na" : ""}">${v == null ? "取扱なし" : v.toFixed(3) + "<small>%</small>"}</div></div>`;
+    }).join("");
+    const spec = [["事務手数料", b.fee], ["保証料", b.guarantee], ["無料の団信", b.danshin], ["5年・125%", b.rule], ["相談方法", b.inPerson]]
+      .filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+    return `<article class="card" id="bank-${b.id}" style="--tc:${t.color}">
+      <div class="card-head"><div class="row"><span class="type-tag">${t.label}</span><span class="month">${esc(b.month)}</span></div>
+        <h3>${esc(b.name)}${b.oldName ? `<br><span class="old">（旧：${esc(b.oldName)}）</span>` : ""}</h3></div>
+      <div class="rates">${rates}</div>
+      ${b.variableCond ? `<div class="cond">金利の条件：${esc(b.variableCond)}</div>` : ""}
+      <dl class="spec">${spec}</dl>
+      <div class="pc">
+        <div class="pros"><h4>メリット</h4><ul>${(b.pros || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div class="cons"><h4>デメリット・注意点</h4><ul>${(b.cons || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      </div>
+      ${b.fit ? `<div class="fit"><b>こんな方に合いやすい：</b>${esc(b.fit)}</div>` : ""}
+      <div class="src">出典：${(b.sources || []).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(host(u))}</a>`).join("　")}</div>
+    </article>`;
+  }).join("");
+}
+
+function renderTable() {
+  const cols = [
+    ["銀行", b => esc(b.short || b.name)],
+    ["種別", b => TYPES[b.type].label, null, "nw"],
+    ["変動", null, "variable"], ["10年固定", null, "fixed10"], ["全期間固定", null, "fixed35"],
+    ["事務手数料", b => esc(b.fee), null, "t"], ["保証料", b => esc(b.guarantee), null, "nw"],
+    ["無料の団信", b => esc(b.danshin), null, "t"], ["5年・125%ルール", b => esc(b.rule), null, "nw"], ["相談方法", b => esc(b.inPerson), null, "t"]
+  ];
+  const mins = {};
+  RATES.forEach(r => { const v = DATA.banks.map(b => b[r.key]).filter(x => x != null); mins[r.key] = v.length ? Math.min(...v) : null; });
+  $("#tbl").innerHTML = `<thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead><tbody>` +
+    DATA.banks.map(b => `<tr>${cols.map(c => c[2]
+      ? `<td class="r num${b[c[2]] != null && b[c[2]] === mins[c[2]] ? " low" : ""}">${pct(b[c[2]])}</td>`
+      : `<td${c[3] ? ` class="${c[3]}"` : ""}>${c[1](b)}</td>`).join("")}</tr>`).join("") + "</tbody>";
+}
+
+function renderNotes() {
+  $("#notes").innerHTML = [
+    `本ページは、各金融機関の公式サイトで公表されている金利・条件（${DATA.asOf}適用分、${DATA.checked}確認）を当社がまとめたものです。`,
+    "掲載の金利は各行が公表する最も低い金利（スマホ・電気などのセット割は除く）、フラット35は最も多い金利です。実際に適用される金利・借入可能額は、各金融機関の審査結果により決まります。",
+    "金利は毎月見直され、原則として借入（融資実行）時点の金利が適用されます。お申込みの際は、必ず各金融機関の最新情報をご確認ください。",
+    "返済額の試算は、元利均等返済・ボーナス返済なし・借入期間中に金利が変わらない前提の目安です。保証料、団信の上乗せ金利、諸費用は含みません。",
+    "当社は金融機関の代理・媒介を行うものではありません。特定の金融機関の利用をおすすめするものではありません。"
+  ].map(t => `<li>${t}</li>`).join("");
+}
+
+renderStats(); renderTabs(); renderBars(); renderSim(); renderChips(); renderCards(); renderTable(); renderNotes();
+</script>
+</body>
+</html>
