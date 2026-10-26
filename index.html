@@ -105,6 +105,24 @@ section{padding:44px 0 8px}
 .res-sub{grid-column:1/-1;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
 .res-sub .diff{color:var(--bad);font-weight:700}
 .res-sub .zero{color:var(--good);font-weight:700}
+.res-sub .up{color:var(--copper);font-weight:700}
+.res-row.na{background:#F4EFE6;border-style:dashed}
+.res-row.na .res-name,.res-row.na .res-pay{color:#9B8F7C}
+.res-row.na .res-pay{font-size:14px}
+.presets{display:flex;gap:6px;margin:-10px 0 18px}
+.presets button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:3px 12px;font:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--copper);border-color:var(--copper);color:#fff}
+.cmp{background:#F4ECDD;border-radius:12px;padding:12px 14px;margin:0 0 10px}
+.cmp > b{display:block;font-size:13px;margin-bottom:8px}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:560px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-grid div{background:var(--paper);border-radius:10px;padding:8px 10px}
+.cmp-grid span{display:block;font-size:11px;color:var(--muted);font-weight:700}
+.cmp-grid strong{display:block;font-size:19px;font-weight:900;line-height:1.3}
+.cmp-grid strong.minus{color:var(--good)} .cmp-grid strong.plus{color:var(--bad)}
+.cmp-grid small{font-size:11px;color:var(--muted)}
+.kb .wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center}
+@media(max-width:720px){.kb .wide{grid-template-columns:1fr}}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
@@ -222,13 +240,16 @@ footer .brand{display:block;margin-bottom:6px}
       <input id="amt" type="range" min="1000" max="12000" step="100" value="5000">
       <label for="yrs">返済期間</label>
       <div class="amt num"><span id="yrsV"></span><small>年</small></div>
-      <input id="yrs" type="range" min="10" max="35" step="1" value="35">
+      <input id="yrs" type="range" min="10" max="50" step="1" value="35" list="yrsMarks">
+      <datalist id="yrsMarks"><option value="35"></option><option value="40"></option><option value="50"></option></datalist>
+      <div class="presets" id="yrsPresets"><button type="button" data-y="35">35年</button><button type="button" data-y="40">40年</button><button type="button" data-y="50">50年</button></div>
       <label>金利タイプ</label>
       <div class="tabs" data-ratetabs></div>
       <p class="hint" id="simHint"></p>
     </div>
     <div>
       <div class="res-head"><b id="resTitle"></b><span>元利均等・ボーナス返済なし</span></div>
+      <div id="cmp"></div>
       <div class="res" id="res"></div>
     </div>
   </div>
@@ -270,14 +291,16 @@ footer .brand{display:block;margin-bottom:6px}
     </div>
     <div class="panel">
       <h3>「5年ルール」「125%ルール」</h3>
-      <svg viewBox="0 0 320 120" role="img" aria-label="5年ルールありの銀行は返済額が5年ごとにしか変わらず、上がり幅も1.25倍まで。">
-        <line x1="30" y1="104" x2="310" y2="104" stroke="#D8CBB5"/>
-        <text x="6" y="16" font-size="10" fill="#6F6353">返済額</text>
-        <polyline points="30,80 120,80 120,62 210,62 210,44 300,44" fill="none" stroke="#46617A" stroke-width="3"/>
-        <text x="36" y="74" font-size="11" font-weight="700" fill="#46617A">ルールあり：5年ごと・最大1.25倍</text>
-        <polyline points="30,92 60,90 90,86 120,84 150,78 180,72 210,66 240,58 270,50 300,40" fill="none" stroke="#B4553A" stroke-width="2" stroke-dasharray="5 4"/>
-        <text x="150" y="98" font-size="11" font-weight="700" fill="#B4553A">ルールなし：半年ごとに見直し</text>
-        <text x="112" y="118" font-size="10" fill="#6F6353">5年</text><text x="202" y="118" font-size="10" fill="#6F6353">10年</text>
+      <svg viewBox="0 0 320 132" role="img" aria-label="5年ルールありの銀行は返済額が5年ごとにしか変わらず、上がり幅も1.25倍まで。">
+        <line x1="40" y1="12" x2="60" y2="12" stroke="#46617A" stroke-width="3"/>
+        <text x="66" y="16" font-size="11" font-weight="700" fill="#46617A">ルールあり：5年ごと・最大1.25倍</text>
+        <line x1="40" y1="28" x2="60" y2="28" stroke="#B4553A" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="66" y="32" font-size="11" font-weight="700" fill="#B4553A">ルールなし：半年ごとに見直し</text>
+        <line x1="30" y1="114" x2="310" y2="114" stroke="#D8CBB5"/>
+        <text x="2" y="52" font-size="10" fill="#6F6353">返済額</text>
+        <polyline points="30,98 120,98 120,82 210,82 210,66 300,66" fill="none" stroke="#46617A" stroke-width="3"/>
+        <polyline points="30,104 60,102 90,98 120,95 150,90 180,84 210,78 240,70 270,62 300,52" fill="none" stroke="#B4553A" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="112" y="128" font-size="10" fill="#6F6353">5年</text><text x="202" y="128" font-size="10" fill="#6F6353">10年</text>
       </svg>
       <p>変動金利で金利が上がったとき、<b>返済額の見直しを5年ごと・上がり幅を1.25倍まで</b>におさえる仕組みです。急な負担増は防げますが、そのぶん元金が減りにくくなります。</p>
       <div class="tip">ルールの無い銀行は、金利が上がると半年ごとに返済額へすぐ反映されます。どちらが良い・悪いではなく「上がったときの家計の動き方」が違います。</div>
@@ -291,6 +314,31 @@ footer .brand{display:block;margin-bottom:6px}
       <h3>団信（団体信用生命保険）</h3>
       <p style="margin-top:0">ローンを借りた人が亡くなったり重い病気になったとき、残りのローンが保険で返済される仕組みです。多くの銀行で基本の団信は無料。<b>がん・3大疾病・全疾病</b>などの保障が無料で付く銀行もあります。</p>
       <div class="tip">同じ金利なら、無料で付く保障が厚い銀行ほどお得です。持病がある方は「ワイド団信」が使えるかも確認しましょう。</div>
+    </div>
+    <div class="panel wide">
+      <div>
+        <h3>50年ローン（35年より長く借りる）</h3>
+        <p style="margin-top:0">期間をのばすと<b>月々の返済は下がります</b>が、<b>総返済額は増え</b>、<b>ローン残高も減りにくく</b>なります。多くの銀行は35年を超えると金利が少し上乗せされ、最長期間も銀行ごとに違います（40年まで・50年まで など）。</p>
+        <p>また「完済時80歳未満」などの年齢の上限があるため、<b>50年で借りられるのは30歳前後までの方</b>が中心です。</p>
+        <div class="tip">将来の売却や住み替えを考えている方は、月々の額だけでなく「10年後に残高がいくら残るか」も確認しましょう。上のシミュレーションで期間を50年にすると比べられます。</div>
+      </div>
+      <div>
+        <svg viewBox="0 0 320 130" role="img" aria-label="5,000万円・金利1.5%で借りた場合のローン残高。35年は35年でゼロ、50年は減り方がゆっくり。10年後の残高は35年が3,828万円、50年が4,275万円。">
+          <text x="2" y="14" font-size="10" fill="#6F6353">ローン残高</text>
+          <line x1="40" y1="110" x2="306" y2="110" stroke="#D8CBB5"/>
+          <line x1="40" y1="20" x2="40" y2="110" stroke="#D8CBB5"/>
+          <text x="4" y="24" font-size="9" fill="#6F6353">5,000万</text>
+          <line x1="92" y1="20" x2="92" y2="110" stroke="#C9A96E" stroke-dasharray="3 3"/>
+          <polyline points="40,20 66,30.2 92,41.1 118,52.9 144,65.6 170,79.3 196,94.1 222,110" fill="none" stroke="#46617A" stroke-width="3"/>
+          <polyline points="40,20 66,26.3 92,33.1 118,40.3 144,48.2 170,56.7 196,65.8 222,75.6 248,86.2 274,97.7 300,110" fill="none" stroke="#B4553A" stroke-width="3"/>
+          <circle cx="92" cy="41.1" r="3.5" fill="#46617A"/><circle cx="92" cy="33.1" r="3.5" fill="#B4553A"/>
+          <text x="98" y="27" font-size="10" font-weight="700" fill="#B4553A">50年：4,275万円</text>
+          <text x="46" y="82" font-size="10" font-weight="700" fill="#46617A">35年：3,828万円</text>
+          <text x="80" y="124" font-size="10" fill="#6F6353">10年後</text>
+          <text x="210" y="124" font-size="10" fill="#6F6353">35年</text><text x="290" y="124" font-size="10" fill="#6F6353">50年</text>
+        </svg>
+        <p style="font-size:12px;color:var(--muted);margin:4px 0 0">例：5,000万円・金利1.5%の場合　月々 153,092円（35年）→ 118,503円（50年）／総返済 6,430万円 → 7,110万円</p>
+      </div>
     </div>
   </div>
 
@@ -327,6 +375,8 @@ const DATA = {
   boj: { rate: "1.25%", note: "2026年9月に1.0%→1.25%へ引上げ" }, // 日銀の政策金利
   // 金利は各行の最優遇（セット割は除く）。null＝取扱なし・非公表
   // feeCalc: rate=借入額×率（plus=定額の上乗せ）／fixed=定額／range=率の幅。feeBy で金利タイプ別に上書き
+  // term: max=最長年数（maxBy=金利タイプ別）／plus=35年超の上乗せ（plusOn=対象の金利タイプ）
+  //       rateOver=35年超は別の金利（別商品など）／overNote=35年超の注意書き／text・age=カードと表に出す説明
   banks: [
     { id: "docomo", type: "net", name: "ドコモSMTBネット銀行", short: "ドコモSMTBネット銀行", oldName: "住信SBIネット銀行（2026年8月に行名変更）",
       month: "2026年10月適用", variable: 1.600, fixed10: 3.379, fixed35: 4.019,
@@ -337,6 +387,8 @@ const DATA = {
       pros: ["全疾病保障が上乗せ金利なしで付く", "50歳以下は3大疾病50%保障も無料", "全国50店舗超で対面相談できる"],
       cons: ["事務手数料が借入額の2.2%", "審査により金利が上乗せされる場合あり", "固定期間中の全額返済は3.3万円"],
       fit: "病気への保障を厚くしたい方／店舗で相談しながら進めたい方",
+      term: { max: 50, maxBy: { fixed35: 35 }, plus: [{ over: 35, upto: 40, v: 0.07 }, { over: 40, upto: 50, v: 0.15 }],
+        text: "50年（35年超40年以内は+0.07%、40年超は+0.15%）", age: "完済時80歳未満 → 50年は29歳まで" },
       sources: ["https://www.netbk.co.jp/contents/lineup/home-loan/real/kinri/", "https://www.netbk.co.jp/contents/lineup/home-loan/danshin/"] },
 
     { id: "jibun", type: "net", name: "auじぶん銀行", month: "2026年10月適用", variable: 1.680, fixed10: 3.416, fixed35: 4.755,
@@ -346,6 +398,8 @@ const DATA = {
       pros: ["がん50%保障団信が上乗せなしで付く", "au・電気等のセットで最大0.15%引下げ", "ネットで契約まで完結できる"],
       cons: ["事務手数料が借入額の2.2%", "セット割はau系サービスの契約が前提", "審査次第で金利の高いプランになる場合あり"],
       fit: "auのスマホ・じぶんでんき等を使っている方／がん保障を無料で付けたい方",
+      term: { max: 50, maxBy: { fixed35: 35 }, plus: [{ over: 35, upto: 50, v: 0.10 }],
+        text: "50年（35年超は+0.1%）", age: "完済時80歳の誕生日まで → 50年は30歳まで" },
       sources: ["https://www.jibunbank.co.jp/products/homeloan/rate/", "https://www.jibunbank.co.jp/products/homeloan/insurance/"] },
 
     { id: "paypay", type: "net", name: "PayPay銀行", month: "2026年10月適用", variable: 1.580, fixed10: 3.520, fixed35: 4.210,
@@ -355,6 +409,8 @@ const DATA = {
       pros: ["ソフトバンク利用で最大0.13%引下げ", "保証料・印紙代が0円", "オンラインで手続きが完結する"],
       cons: ["借入35年超は金利+0.30%", "全疾病保障などは上乗せ金利が必要", "全額繰上返済は33,000円"],
       fit: "ソフトバンクのスマホ・でんきを使っている方／手続きをスマホで済ませたい方",
+      term: { max: 50, maxBy: { fixed35: 35 }, plus: [{ over: 35, upto: 50, v: 0.30 }],
+        text: "50年（35年超は+0.30%）", age: "完済時80歳未満 → 50年は29歳まで" },
       sources: ["https://www.paypay-bank.co.jp/mortgage/interest/index.html", "https://www.paypay-bank.co.jp/mortgage/insurance/select.html"] },
 
     { id: "sony", type: "net", name: "ソニー銀行", month: "2026年10月適用", variable: 1.847, fixed10: 3.715, fixed35: 4.975,
@@ -364,6 +420,8 @@ const DATA = {
       pros: ["繰上返済・金利タイプ変更の手数料が0円", "土日祝も電話で相談できる", "手数料を定率か定額から選べる"],
       cons: ["年収400万円以上が申込条件", "変動金利は掲載行の中では高め", "つなぎ融資は他社の利用が必要"],
       fit: "繰上返済をこまめにしたい方／借りた後に固定へ切り替えるかもしれない方",
+      term: { max: 50, maxBy: { fixed35: 35 }, overNote: "期間による上乗せなし・借入割合と完済時の年齢で+0.1〜0.2%の場合あり",
+        text: "50年（期間による上乗せなし。完済時75歳以上かつ借入が購入価格の9割超などで+0.1〜0.2%）", age: "完済時85歳未満 → 50年は34歳まで" },
       sources: ["https://sonybank.jp/rate/hl01.html", "https://sonybank.jp/products/hl/"] },
 
     { id: "rakuten", type: "net", name: "楽天銀行", month: "2026年10月適用", variable: 1.747, fixed10: 4.074, fixed35: null,
@@ -373,6 +431,10 @@ const DATA = {
       pros: ["手数料が一律33万円（借入が大きいほど有利）", "がん50%＋全疾病保障が0円", "つなぎローンに対応"],
       cons: ["35年などの長期固定が無い（最長10年）", "他行口座で返済すると金利+0.3%", "変動金利は毎月見直し"],
       fit: "借入額が大きい方（手数料が定額）／楽天銀行を返済口座にできる方",
+      term: { max: 50, maxBy: { fixed35: 35 },
+        rateOver: { variable: [{ over: 35, upto: 50, rate: 2.077, label: "別商品「50年住宅ローン」の金利" }],
+                    fixed10: [{ over: 35, upto: 50, rate: 4.404, label: "別商品「50年住宅ローン」の金利" }] },
+        text: "35年（36〜50年は別商品「50年住宅ローン」：変動2.077%〜・10年固定4.404%〜）", age: "完済時80歳未満 → 50年は29歳まで" },
       sources: ["https://www.rakuten-bank.co.jp/home-loan/rate/", "https://www.rakuten-bank.co.jp/home-loan/insurance/"] },
 
     { id: "shinsei", type: "net", name: "SBI新生銀行", month: "2026年10月適用", variable: 1.410, fixed10: 3.380, fixed35: 4.330,
@@ -382,6 +444,8 @@ const DATA = {
       pros: ["自己資金1割以上で金利優遇", "全疾病保障付団信が上乗せなし", "繰上返済は一部・全額とも0円"],
       cons: ["事務手数料が借入額の2.2%", "融資まで1か月半以上かかる場合あり", "繰上返済は期間短縮型のみ"],
       fit: "自己資金を1割以上入れられる方／繰上返済で早めに返したい方",
+      term: { max: 50, maxBy: { fixed10: 35, fixed35: 35 }, plus: [{ over: 35, upto: 50, v: 0.10 }],
+        text: "50年（変動のみ・新規購入のみ。35年超は+0.1%）", age: "完済時80歳未満 → 50年は29歳まで" },
       sources: ["https://www.sbishinseibank.co.jp/retail/housing/interest/interest_rate_new/", "https://www.sbishinseibank.co.jp/retail/housing/insurance.html"] },
 
     { id: "mufg", type: "mega", name: "三菱UFJ銀行", month: "2026年10月適用", variable: 1.195, fixed10: 3.75, fixed35: 4.35,
@@ -391,6 +455,8 @@ const DATA = {
       pros: ["変動金利の水準が低め", "借入期間40年でも金利の上乗せなし", "ネットなら一部繰上返済が無料"],
       cons: ["給与振込などの利用条件が付く", "事務手数料が借入額の2.2%", "対面相談はローン窓口のある店舗のみ"],
       fit: "給与振込を三菱UFJ銀行にできる方／長い期間（40年）で借りたい方",
+      term: { max: 40, rateOver: { fixed35: [{ over: 35, upto: 40, rate: 4.40, label: "36〜40年の全期間固定" }] }, overNote: "35年超も上乗せなし",
+        text: "40年（35年超も上乗せなし。50年は取扱なし）", age: "完済時80歳まで → 40年は40歳まで" },
       sources: ["https://www.bk.mufg.jp/kariru/jutaku/yuuguu/index.html", "https://www.bk.mufg.jp/kariru/jutaku/hoken/shippei/index.html"] },
 
     { id: "smbc", type: "mega", name: "三井住友銀行", month: "2026年10月適用", variable: 1.525, fixed10: 4.00, fixed35: 4.76,
@@ -400,6 +466,9 @@ const DATA = {
       pros: ["ネットで24時間申込・相談できる", "ネットなら繰上返済が無料", "自然災害などの保障オプションを選べる"],
       cons: ["メガバンクの中では変動金利が高め", "Olive口座と給与振込が前提", "事務手数料が借入額の2.2%"],
       fit: "Oliveや三井住友銀行をメインで使っている方／ネットで手続きしたい方",
+      term: { max: 39, maxLabel: "39年11ヵ月", plus: [{ over: 35, upto: 39, v: 0.15 }], plusOn: ["variable", "fixed10"],
+        rateOver: { fixed35: [{ over: 35, upto: 39, rate: 4.78, label: "35年超の全期間固定" }] },
+        text: "39年11ヵ月（35年超は変動・当初固定+0.15%。50年は取扱なし）", age: "完済時80歳まで → 最長は40歳まで" },
       sources: ["https://www.smbc.co.jp/kojin/jutaku_loan/kinri/", "https://www.smbc.co.jp/kojin/jutaku_loan/shouhin/web_jutaku/"] },
 
     { id: "mizuho", type: "mega", name: "みずほ銀行", month: "2026年10月適用", variable: 1.275, fixed10: 3.60, fixed35: 4.16,
@@ -409,6 +478,7 @@ const DATA = {
       pros: ["手数料0円の型も選べる", "がん団信の上乗せが年0.1%と小さめ", "対面の専門拠点で相談できる"],
       cons: ["手数料0円の型は金利が約0.2%高い", "どこまで引下げになるかは審査で決まる", "全期間固定は手数料型のみ"],
       fit: "最初の手数料をおさえたい方／対面でじっくり相談したい方",
+      term: { max: 35, text: "35年（35年超・50年は取扱なし）", age: "完済時81歳未満 → 35年は45歳まで" },
       sources: ["https://www.mizuhobank.co.jp/loan_housing/housingloancost/index.html", "https://www.mizuhobank.co.jp/loan_housing/life_insurance/index.html"] },
 
     { id: "resona", type: "mega", name: "りそな銀行", month: "2026年10月適用", variable: 1.250, fixed10: 4.205, fixed35: 4.570,
@@ -418,6 +488,8 @@ const DATA = {
       pros: ["土日営業の店舗で相談できる", "団信の種類が豊富（団信革命など）", "つなぎ融資・分割融資に対応"],
       cons: ["10年固定の金利は高め", "手数料2.2%に加え事務手数料5.5万円", "特約付団信は50歳以上は申込不可"],
       fit: "土日に店舗で相談したい方／保障の厚い団信を選びたい方",
+      term: { max: 40, maxBy: { fixed35: 35 }, overNote: "35年超の上乗せの有無は公表なし・要確認",
+        text: "40年（全期間固定は35年まで。50年は取扱なし）", age: "完済時80歳未満 → 40年は39歳まで" },
       sources: ["https://www.resonabank.co.jp/kojin/jutaku/kinri/", "https://www.resonabank.co.jp/kojin/jutaku/danshin/"] },
 
     { id: "flat", type: "flat", name: "フラット35（住宅金融支援機構）", short: "フラット35", month: "2026年10月資金受取分", variable: null, fixed10: null, fixed35: 3.830,
@@ -427,6 +499,9 @@ const DATA = {
       pros: ["完済まで金利・返済額が変わらない", "保証料・繰上返済手数料が不要", "子育て・省エネ住宅で金利引下げ制度あり"],
       cons: ["変動金利より金利が高い", "融資手数料は取扱機関ごとに差がある", "住宅の技術基準を満たす必要がある"],
       fit: "完済まで返済額を固定したい方／子育て世帯・省エネ住宅を買う方",
+      term: { max: 35, maxBy: { fixed35: 50 },
+        rateOver: { fixed35: [{ over: 35, upto: 50, rate: 4.10, label: "フラット50・長期優良住宅などが条件" }] },
+        text: "35年（36〜50年は「フラット50」：最頻4.10%・長期優良住宅や予備認定マンションなどが条件）", age: "フラット50は申込時44歳未満・完済時80歳 → 50年は30歳まで" },
       sources: ["https://www.flat35.com/loan/index.html", "https://www.simulation.jhf.go.jp/flat35/kinri/index.php/rates/top"] }
   ]
 };
@@ -454,6 +529,32 @@ function monthly(principal, ratePct, years) {
   const r = ratePct / 100 / 12, n = years * 12;
   return r === 0 ? principal / n : principal * r / (1 - Math.pow(1 + r, -n));
 }
+// afterYears年後のローン残高
+function balanceAfter(principal, ratePct, years, afterYears) {
+  const r = ratePct / 100 / 12, m = afterYears * 12, M = monthly(principal, ratePct, years);
+  return r === 0 ? principal - M * m : principal * Math.pow(1 + r, m) - M * (Math.pow(1 + r, m) - 1) / r;
+}
+// 金利タイプkの最長期間
+function maxYears(b, k) {
+  const t = b.term || {};
+  return (t.maxBy && t.maxBy[k]) || t.max || 35;
+}
+// 期間Y年で借りたときの金利（35年超の上乗せ・別金利込み）。借りられなければ null
+function effRate(b, k, Y) {
+  const t = b.term || {};
+  if (Y > maxYears(b, k)) return null;
+  if (Y > 35) {
+    const ov = t.rateOver && t.rateOver[k] && t.rateOver[k].find(x => Y > x.over && Y <= x.upto);
+    if (ov) return { rate: ov.rate, label: ov.label };
+    if (b[k] == null) return null;
+    const pl = (!t.plusOn || t.plusOn.includes(k)) && (t.plus || []).find(x => Y > x.over && Y <= x.upto);
+    if (pl && pl.v) return { rate: b[k] + pl.v, label: `${pl.over}年超の上乗せ+${pl.v}%込み` };
+    if (t.overNote) return { rate: b[k], label: t.overNote };
+  }
+  return b[k] == null ? null : { rate: b[k] };
+}
+const maxLabel = (b, k) => (b.term && b.term.maxLabel && !(b.term.maxBy && b.term.maxBy[k])) ? b.term.maxLabel : maxYears(b, k) + "年";
+const offers = (b, k) => b[k] != null || !!(b.term && b.term.rateOver && b.term.rateOver[k]);
 function feeText(b, principal, k) {
   const f = (b.feeBy && b.feeBy[k]) || b.feeCalc || {};
   if (f.type === "rate") return man(principal * f.rate + (f.plus || 0));
@@ -505,7 +606,7 @@ function renderBars() {
   }).join("");
   const missing = DATA.banks.filter(b => rateOf(b, k) == null).map(b => b.short || b.name);
   const extra = {
-    variable: "",
+    variable: "※ 35年を超えて借りると金利が上乗せされる銀行があります（返済シミュレーションで期間を変えると確認できます）。",
     fixed10: "※ 10年固定は、11年目以降の金利の決まり方が銀行ごとに違います（当初10年だけ優遇する銀行もあります）。",
     fixed35: "※ フラット35は最も多い金利、各銀行は最も低い金利です。"
   };
@@ -527,8 +628,12 @@ function renderSim() {
   const P = st.amount * 10000, Y = st.years, k = st.rate;
   $("#amtV").textContent = st.amount.toLocaleString("ja-JP");
   $("#yrsV").textContent = Y;
-  const list = DATA.banks.filter(b => rateOf(b, k) != null)
-    .map(b => ({ b, m: monthly(P, rateOf(b, k), Y) })).sort((a, z) => a.m - z.m);
+  const list = [], ng = [];
+  DATA.banks.filter(b => offers(b, k)).forEach(b => {
+    const e = effRate(b, k, Y);
+    if (e) list.push({ b, e, m: monthly(P, e.rate, Y) }); else ng.push(b);
+  });
+  list.sort((a, z) => a.m - z.m);
   const best = list.length ? list[0].m : 0;
   const span = k === "fixed10" ? Math.min(Y, 10) : Y; // 10年固定は金利が決まっている当初10年分だけで差額を出す
   $("#resTitle").textContent = `${RATES.find(r => r.key === k).long}で${man(P)}・${Y}年借りた場合`;
@@ -537,19 +642,45 @@ function renderSim() {
     return `<div class="res-row${i === 0 ? " top" : ""}">
       <div class="res-name"><i class="dot" style="background:${TYPES[x.b.type].color}"></i><span>${esc(x.b.short || x.b.name)}</span></div>
       <div class="res-pay num">${yen(x.m)}<small>円/月</small></div>
-      <div class="res-sub"><span>金利 ${pct(rateOf(x.b, k))}</span><span>事務手数料 ${esc(feeText(x.b, P, k))}</span>
+      <div class="res-sub"><span>金利 ${pct(x.e.rate)}${x.e.label ? `<span class="up">（${esc(x.e.label)}）</span>` : ""}</span><span>事務手数料 ${esc(feeText(x.b, P, k))}</span>
       ${d < 1 ? '<span class="zero">いちばん低い</span>' : `<span class="diff">+${yen(d)}円/月（${span}年で約${man(d * span * 12)}）</span>`}</div>
     </div>`;
-  }).join("");
+  }).join("") + ng.map(b => `<div class="res-row na">
+      <div class="res-name"><i class="dot" style="background:${TYPES[b.type].color}"></i><span>${esc(b.short || b.name)}</span></div>
+      <div class="res-pay">${Y}年は選べません</div>
+      <div class="res-sub"><span>最長${maxLabel(b, k)}まで</span></div>
+    </div>`).join("");
+  renderCompare(P, Y, k, list[0]);
   const hints = {
     variable: "※ 変動金利は、今の金利がずっと変わらなかった場合の目安です。金利が上がれば返済額も上がります。",
     fixed10: "※ 当初10年間の月々の返済額です。11年目以降はその時の金利で返済額が変わります。",
     fixed35: "※ 全期間固定は、完済まで返済額が変わりません。"
   };
-  $("#simHint").textContent = hints[k] + "保証料・団信の上乗せ金利は含みません。";
+  $("#simHint").textContent = hints[k] + (Y > 35 ? "35年を超える期間は、上乗せされる金利を含めて計算しています。完済時の年齢の上限にもご注意ください。" : "") + "保証料・団信の上乗せ金利は含みません。";
+  document.querySelectorAll("#yrsPresets button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.y === Y));
+}
+// 35年で借りた場合との比較（いちばん低い銀行で）
+function renderCompare(P, Y, k, top) {
+  const base = top && effRate(top.b, k, 35);
+  if (!top || Y === 35 || !base) { $("#cmp").innerHTML = ""; return; }
+  const m35 = monthly(P, base.rate, 35), mY = top.m;
+  const sign = v => (v >= 0 ? "+" : "−");
+  const cell = (label, d, from, to, fmt) =>
+    `<div><span>${label}</span><strong class="num ${d >= 0 ? "plus" : "minus"}">${sign(d)}${fmt(Math.abs(d))}</strong><small>35年 ${fmt(from)} → ${Y}年 ${fmt(to)}</small></div>`;
+  const yenU = v => yen(v) + "円";
+  const cells = [cell("月々の返済", mY - m35, m35, mY, yenU)];
+  if (k !== "fixed10") cells.push(cell("総返済額", mY * Y * 12 - m35 * 420, m35 * 420, mY * Y * 12, man));
+  const b35 = balanceAfter(P, base.rate, 35, 10), bY = balanceAfter(P, top.e.rate, Y, 10);
+  cells.push(cell("10年後のローン残高", bY - b35, b35, bY, man));
+  $("#cmp").innerHTML = `<div class="cmp"><b>35年で借りた場合とくらべると（${esc(top.b.short || top.b.name)}・金利が変わらない場合）</b><div class="cmp-grid">${cells.join("")}</div></div>`;
 }
 $("#amt").addEventListener("input", e => { st.amount = +e.target.value; renderSim(); });
 $("#yrs").addEventListener("input", e => { st.years = +e.target.value; renderSim(); });
+$("#yrsPresets").addEventListener("click", e => {
+  const b = e.target.closest("[data-y]");
+  if (!b) return;
+  st.years = +b.dataset.y; $("#yrs").value = st.years; renderSim();
+});
 
 function renderChips() {
   const opts = [["all", "すべて"], ...Object.entries(TYPES).map(([k, t]) => [k, t.label])];
@@ -570,7 +701,9 @@ function renderCards() {
       const v = rateOf(b, r.key);
       return `<div class="rate"><div class="l">${r.label}</div><div class="n num${v == null ? " na" : ""}">${v == null ? "取扱なし" : v.toFixed(3) + "<small>%</small>"}</div></div>`;
     }).join("");
-    const spec = [["事務手数料", b.fee], ["保証料", b.guarantee], ["無料の団信", b.danshin], ["5年・125%", b.rule], ["相談方法", b.inPerson]]
+    const tm = b.term || {};
+    const spec = [["事務手数料", b.fee], ["保証料", b.guarantee], ["無料の団信", b.danshin], ["5年・125%", b.rule],
+      ["最長期間", tm.text], ["年齢の目安", tm.age], ["相談方法", b.inPerson]]
       .filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
     return `<article class="card" id="bank-${b.id}" style="--tc:${t.color}">
       <div class="card-head"><div class="row"><span class="type-tag">${t.label}</span><span class="month">${esc(b.month)}</span></div>
@@ -594,7 +727,8 @@ function renderTable() {
     ["種別", b => TYPES[b.type].label, null, "nw"],
     ["変動", null, "variable"], ["10年固定", null, "fixed10"], ["全期間固定", null, "fixed35"],
     ["事務手数料", b => esc(b.fee), null, "t"], ["保証料", b => esc(b.guarantee), null, "nw"],
-    ["無料の団信", b => esc(b.danshin), null, "t"], ["5年・125%ルール", b => esc(b.rule), null, "nw"], ["相談方法", b => esc(b.inPerson), null, "t"]
+    ["無料の団信", b => esc(b.danshin), null, "t"], ["5年・125%ルール", b => esc(b.rule), null, "nw"],
+    ["最長期間（35年超）", b => esc((b.term || {}).text || "35年"), null, "t"], ["相談方法", b => esc(b.inPerson), null, "t"]
   ];
   const mins = {};
   RATES.forEach(r => { const v = DATA.banks.map(b => b[r.key]).filter(x => x != null); mins[r.key] = v.length ? Math.min(...v) : null; });
@@ -609,7 +743,8 @@ function renderNotes() {
     `本ページは、各金融機関の公式サイトで公表されている金利・条件（${DATA.asOf}適用分、${DATA.checked}確認）を当社がまとめたものです。`,
     "掲載の金利は各行が公表する最も低い金利（スマホ・電気などのセット割は除く）、フラット35は最も多い金利です。実際に適用される金利・借入可能額は、各金融機関の審査結果により決まります。",
     "金利は毎月見直され、原則として借入（融資実行）時点の金利が適用されます。お申込みの際は、必ず各金融機関の最新情報をご確認ください。",
-    "返済額の試算は、元利均等返済・ボーナス返済なし・借入期間中に金利が変わらない前提の目安です。保証料、団信の上乗せ金利、諸費用は含みません。",
+    "返済額の試算は、元利均等返済・ボーナス返済なし・借入期間中に金利が変わらない前提の目安です。35年を超える期間は各行が公表する上乗せ金利を含みます。保証料、団信の上乗せ金利、諸費用は含みません。",
+    "借入期間は、各金融機関の年齢条件（借入時・完済時の年齢の上限）や物件の条件によって、希望どおりにならない場合があります。",
     "当社は金融機関の代理・媒介を行うものではありません。特定の金融機関の利用をおすすめするものではありません。"
   ].map(t => `<li>${t}</li>`).join("");
 }
